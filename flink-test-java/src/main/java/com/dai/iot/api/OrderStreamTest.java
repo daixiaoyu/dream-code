@@ -50,16 +50,10 @@ public class OrderStreamTest {
         WatermarkStrategy<JSONObject> jsonObjectWatermarkStrategy = WatermarkStrategy.<JSONObject>forBoundedOutOfOrderness(Duration.ofSeconds(0))
                 .withTimestampAssigner((event, timestamp) -> event.getLong(CREATE_TIME));
 
-//        source.map(orderString -> {
-//            JSONObject order = JSON.parseObject(orderString);
-//            order.put(EVEN_TIME, DateUtil.getTimeLong(order.getString(CREATE_TIME)));
-//            return order;
-//        })
-        source.map(new MapFunction<String, JSONObject>() {
-            @Override
-            public JSONObject map(String value) throws Exception {
-                return null;
-            }
+        source.map(orderString -> {
+            JSONObject order = JSON.parseObject(orderString);
+            order.put(EVEN_TIME, DateUtil.getTimeLong(order.getString(CREATE_TIME)));
+            return order;
         })
                 .assignTimestampsAndWatermarks(jsonObjectWatermarkStrategy)
                 .keyBy(s -> s.getString(VENDER_ID))
