@@ -1,0 +1,31 @@
+class Solution {
+    //    s 由英文字母、数字、符号和空格组成
+    public int lengthOfLongestSubstring(String s) {
+        HashSet<Character> characters = new HashSet<>();
+
+        int j = 0;
+        int ans = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            if (i > 0) {
+                characters.remove(i - 1);
+            }
+
+            while (j < s.length() && !characters.contains(s.charAt(j))) {
+                characters.add(s.charAt(j));
+                j++;
+            }
+
+            ans = Math.max(ans, j - i);
+        }
+
+        return ans;
+
+    }
+}
+
+//total_testcases:987
+//total_correct:160
+//input_formatted:"pwwkew"
+//expected_output:3
+//code_output:2
