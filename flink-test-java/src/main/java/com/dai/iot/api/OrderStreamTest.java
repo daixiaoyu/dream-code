@@ -12,6 +12,7 @@ import org.apache.flink.api.common.state.MapStateDescriptor;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.functions.sink.PrintSinkFunction;
 import org.apache.flink.streaming.api.functions.windowing.ProcessWindowFunction;
 import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
 import org.apache.flink.streaming.api.windowing.evictors.TimeEvictor;
@@ -93,7 +94,7 @@ public class OrderStreamTest {
                     }
 
                 })
-                .print();
+                .addSink(new PrintSinkFunction<>()).setParallelism(1).name("daixinyu");
 
         environment.execute();
     }

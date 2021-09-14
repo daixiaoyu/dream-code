@@ -36,6 +36,8 @@ under the License.
         <maven.compiler.source>${target.java.version}</maven.compiler.source>
         <maven.compiler.target>${target.java.version}</maven.compiler.target>
         <log4j.version>2.12.1</log4j.version>
+        <hive.version>3.1.2</hive.version>
+        <hadoop.version>3.2.1</hadoop.version>
     </properties>
 
     <repositories>
@@ -54,13 +56,19 @@ under the License.
 
     <dependencies>
 
+        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>30.1.1-jre</version>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-table-api-java-bridge_${scala.binary.version}</artifactId>
             <version>${flink.version}</version>
         </dependency>
 
-        <!-- This dependency is provided, because it should not be packaged into the JAR file. -->
         <!-- 下面仅仅用于IDE 在Flink lib 中已经内置 -->
 
         <dependency>
@@ -75,7 +83,6 @@ under the License.
             <version>${flink.version}</version>
         </dependency>
 
-
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-clients_${scala.binary.version}</artifactId>
@@ -88,7 +95,13 @@ under the License.
             <version>${flink.version}</version>
         </dependency>
 
-        <!-- Add connector dependencies here. They must be in the default scope (compile). -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-json</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
+
+        <!-- Flink 连接器相关，必须打包提交运行 -->
 
         <dependency>
             <groupId>org.apache.flink</groupId>
@@ -102,30 +115,11 @@ under the License.
             <version>8.0.25</version>
         </dependency>
 
-        <!-- Add logging framework, to produce console output when running in the IDE. -->
-
-        <!-- These dependencies are excluded from the application JAR by default. -->
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <version>${log4j.version}</version>
-            <scope>runtime</scope>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-connector-hive_2.11</artifactId>
+            <version>${flink.version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>${log4j.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${log4j.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-
 
         <dependency>
             <groupId>org.apache.flink</groupId>
@@ -140,9 +134,72 @@ under the License.
         </dependency>
 
 
+        <!-- hive 相关依赖 -->
+
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.hive</groupId>-->
+        <!--            <artifactId>hive-exec</artifactId>-->
+        <!--            <version>${hive.version}</version>-->
+        <!--            <exclusions>-->
+        <!--                <exclusion>-->
+        <!--                    <groupId>com.google.guava</groupId>-->
+        <!--                    <artifactId>guava</artifactId>-->
+        <!--                </exclusion>-->
+        <!--                <exclusion>-->
+        <!--                    <groupId>org.apache.logging.log4j</groupId>-->
+        <!--                    <artifactId>log4j-slf4j-impl</artifactId>-->
+        <!--                </exclusion>-->
+        <!--                <exclusion>-->
+        <!--                    <groupId>org.apache.logging.log4j</groupId>-->
+        <!--                    <artifactId>log4j-api</artifactId>-->
+        <!--                </exclusion>-->
+        <!--                <exclusion>-->
+        <!--                    <groupId>org.apache.logging.log4j</groupId>-->
+        <!--                    <artifactId>log4j-core</artifactId>-->
+        <!--                </exclusion>-->
+        <!--            </exclusions>-->
+        <!--        </dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/org.apache.thrift/libfb303 -->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.thrift</groupId>-->
+        <!--            <artifactId>libfb303</artifactId>-->
+        <!--            <version>0.9.3</version>-->
+        <!--        </dependency>-->
+
+        <!-- Hadoop 相关依赖 -->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.hadoop</groupId>-->
+        <!--            <artifactId>hadoop-mapreduce-client-core</artifactId>-->
+        <!--            <version>${hadoop.version}</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.hadoop</groupId>-->
+        <!--            <artifactId>hadoop-common</artifactId>-->
+        <!--            <version>${hadoop.version}</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.hadoop</groupId>-->
+        <!--            <artifactId>hadoop-mapreduce-client-common</artifactId>-->
+        <!--            <version>${hadoop.version}</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.hadoop</groupId>-->
+        <!--            <artifactId>hadoop-mapreduce-client-jobclient</artifactId>-->
+        <!--            <version>${hadoop.version}</version>-->
+        <!--        </dependency>-->
+
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.commons</groupId>-->
+        <!--            <artifactId>commons-compress</artifactId>-->
+        <!--            <version>1.21</version>-->
+        <!--        </dependency>-->
+
     </dependencies>
 
     <build>
+
+        <finalName>flink-java</finalName>
         <plugins>
 
             <!-- Java Compiler -->
@@ -190,12 +247,6 @@ under the License.
                                     </excludes>
                                 </filter>
                             </filters>
-                            <transformers>
-                                <transformer
-                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.dai.iot.api.IotMain</mainClass>
-                                </transformer>
-                            </transformers>
                         </configuration>
                     </execution>
                 </executions>

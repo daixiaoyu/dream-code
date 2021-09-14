@@ -38,9 +38,7 @@ public class InsertUser {
                 ")");
 
 //      tableEnvironment.executeSql("insert into flink_user values(1,'代欣雨','麓山',27,1),(2,'韩佩伶','成华',25,1)");
-
         TableResult tableResult = tableEnvironment.executeSql("select age,count(1) as rs from flink_user group by age");
-
         tableResult.print();
     }
 }
