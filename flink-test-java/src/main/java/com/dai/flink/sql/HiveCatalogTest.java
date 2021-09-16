@@ -1,4 +1,4 @@
-package com.dai.iot.sql;
+package com.dai.flink.sql;
 
 import com.google.common.base.Preconditions;
 import org.apache.flink.table.api.EnvironmentSettings;
@@ -17,7 +17,8 @@ import java.net.URL;
  **/
 public class HiveCatalogTest {
 
-    private static final String cource_all = "";
+    // 启动hive 元数据服务
+    // hive --service metastore
 
     public static void main(String[] args) {
         EnvironmentSettings settings = EnvironmentSettings.newInstance().useBlinkPlanner().build();

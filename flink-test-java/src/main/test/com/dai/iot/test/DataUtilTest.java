@@ -1,9 +1,9 @@
-package com.dai.iot.test;
+package com.dai.flink.test;
 
-import com.dai.iot.model.OilQualityData;
-import com.dai.iot.model.OilQualityType;
-import com.dai.iot.util.DataUtil;
-import com.dai.iot.util.DateUtil;
+import com.dai.flink.model.OilQualityData;
+import com.dai.flink.model.OilQualityType;
+import com.dai.flink.util.DataUtil;
+import com.dai.flink.util.DateUtil;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import sun.misc.Unsafe;

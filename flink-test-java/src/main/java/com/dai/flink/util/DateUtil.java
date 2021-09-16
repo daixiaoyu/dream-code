@@ -1,8 +1,6 @@
-package com.dai.iot.util;
+package com.dai.flink.util;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

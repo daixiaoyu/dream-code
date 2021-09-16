@@ -1,4 +1,4 @@
-package com.dai.iot.sql;
+package com.dai.flink.sql;
 
 import org.apache.flink.table.api.EnvironmentSettings;
 import org.apache.flink.table.api.TableEnvironment;

@@ -1,4 +1,4 @@
-package com.dai.iot.test;
+package com.dai.flink.test;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

@@ -1,9 +1,9 @@
-package com.dai.iot.util;
+package com.dai.flink.util;
 
 
-import com.dai.iot.model.OilQualityData;
-import com.dai.iot.model.OilQualityType;
-import com.dai.iot.model.TemperatureData;
+import com.dai.flink.model.OilQualityData;
+import com.dai.flink.model.OilQualityType;
+import com.dai.flink.model.TemperatureData;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
