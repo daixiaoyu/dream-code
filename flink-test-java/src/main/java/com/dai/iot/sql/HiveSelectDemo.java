@@ -19,7 +19,11 @@ public class HiveSelectDemo {
 
     public static void main(String[] args) {
 
-        EnvironmentSettings settings = EnvironmentSettings.newInstance().useBlinkPlanner().build();
+        EnvironmentSettings settings = EnvironmentSettings.
+                newInstance().
+                useBlinkPlanner().
+                inBatchMode().
+                build();
 
         TableEnvironment tableEnv = TableEnvironment.create(settings);
 
@@ -38,7 +42,8 @@ public class HiveSelectDemo {
 
         tableEnv.useCatalog(catalog_name);
 
-        TableResult tableResult = tableEnv.executeSql("select * from exercise_course");
+
+        TableResult tableResult = tableEnv.executeSql("insert overwrite flink.course_all select course,count(1) as rs from exercise_course group by course");
 
         tableResult.print();
 

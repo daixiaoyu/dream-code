@@ -16,6 +16,9 @@ import java.net.URL;
  * @Version 1.0
  **/
 public class HiveCatalogTest {
+
+    private static final String cource_all = "";
+
     public static void main(String[] args) {
         EnvironmentSettings settings = EnvironmentSettings.newInstance().useBlinkPlanner().build();
         TableEnvironment tableEnv = TableEnvironment.create(settings);
@@ -35,20 +38,26 @@ public class HiveCatalogTest {
         tableEnv.useCatalog(catalog_name);
 
 
-        tableEnv.executeSql(
-                "CREATE TABLE flink_order (\n" +
-                        "  id INT,\n" +
-                        "  amount INT,\n" +
-                        "  user_id STRING,\n" +
-                        "  vender_id STRING,\n" +
-                        "  create_time TIMESTAMP(3),\n" +
-                        "  WATERMARK FOR create_time AS create_time - INTERVAL '0' SECOND\n" +
-                        ") WITH (\n" +
-                        "  'connector' = 'filesystem',  \n" +
-                        "  'path' = '/Users/gump/study/source/github/dream-code/flink-test-java/src/main/resources/orderSql.txt',  \n" +
-                        "  'format' = 'json'\n" +
-                        ")"
-        );
+//        tableEnv.executeSql(
+//                "CREATE TABLE course_all (\n" +
+//                        "  course string,\n" +
+//                        "  rs BIGINT\n" +
+//                        ") WITH (\n" +
+//                        "  'connector' = 'filesystem',  \n" +
+//                        "  'path' = '/Users/gump/study/source/github/dream-code/flink-test-java/src/main/resources/courseAll.txt',  \n" +
+//                        "  'format' = 'json'\n" +
+//                        ")"
+//        );
+
+
+        tableEnv.executeSql(" CREATE TABLE course_all (\n" +
+                "  course string,\n" +
+                "  rs BIGINT\n" +
+                ") WITH (\n" +
+                "  'connector' = 'filesystem',  \n" +
+                "  'path' = '/Users/gump/study/source/github/dream-code/flink-test-java/src/main/resources/data/courseAll.txt',  \n" +
+                "  'format' = 'json'\n" +
+                ") ");
 
         TableResult tableResult = tableEnv.executeSql("show tables");
 
