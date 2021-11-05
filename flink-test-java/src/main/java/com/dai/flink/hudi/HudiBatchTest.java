@@ -49,7 +49,7 @@ public class HudiBatchTest {
 //                "  ('id7','Bob',44,TIMESTAMP '1970-01-01 00:00:07','par4'),\n" +
 //                "  ('id8','Han',56,TIMESTAMP '1970-01-01 00:00:08','par4') ");
 
-        tableEnvironment.executeSql(" insert into t1 values ('id9','test',27,TIMESTAMP '1970-01-01 00:00:01','par5') ");
+        tableEnvironment.executeSql(" insert into t1 values ('id13','test',27,TIMESTAMP '1970-01-01 00:00:01','par5') ");
 
 
     }

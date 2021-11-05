@@ -38,7 +38,6 @@ public class HudiStreamTest {
                 "  'read.streaming.check-interval' = '4'\n" +
                 ")");
 
-
         TableResult tableResult = tableEnvironment.executeSql("select * from t1");
         tableResult.print();
     }

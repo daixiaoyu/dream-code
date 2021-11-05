@@ -29,6 +29,7 @@ public class HiveSelectDemo {
         TableEnvironment tableEnv = TableEnvironment.create(settings);
 
         URL location = Preconditions.class.getProtectionDomain().getCodeSource().getLocation();
+
         System.out.println(location.toString());
 
         String catalog_name = "hive_catalog";
@@ -42,7 +43,6 @@ public class HiveSelectDemo {
         tableEnv.registerCatalog(catalog_name, hive);
 
         tableEnv.useCatalog(catalog_name);
-
 
         TableResult tableResult = tableEnv.executeSql("insert overwrite flink.course_all select course,count(1) as rs from exercise_course group by course");
 

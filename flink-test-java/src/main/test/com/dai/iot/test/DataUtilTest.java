@@ -2,7 +2,6 @@ package com.dai.flink.test;
 
 import com.dai.flink.model.OilQualityData;
 import com.dai.flink.model.OilQualityType;
-import com.dai.flink.util.DataUtil;
 import com.dai.flink.util.DateUtil;
 import org.testng.Assert;
 import org.testng.annotations.Test;
